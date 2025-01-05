@@ -1,0 +1,46 @@
+{
+  "name": "polyforge",
+  "version": "0.1.0",
+  "description": "A CLI tool for Polygon developers",
+  "main": "src/index.js",
+  "bin": {
+    "polyforge": "src/index.js"
+  },
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "jest",
+    "test:integration": "jest tests/integration",
+    "test:unit": "jest tests/unit",
+    "lint": "eslint src",
+    "prepublishOnly": "npm run test"
+  },
+  "keywords": [
+    "polygon",
+    "cli",
+    "ethereum",
+    "smart-contracts"
+  ],
+  "author": "Jefferson Ighalo",
+  "license": "MIT",
+  "dependencies": {
+    "commander": "^8.3.0",
+    "ethers": "^6.13.2"
+  },
+  "devDependencies": {
+    "chai": "^4.3.7",
+    "jest": "^29.7.0",
+    "eslint": "^8.0.0"
+  },
+  "files": [
+    "src",
+    "README.md",
+    "LICENSE"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jeffersonnnn/polyforge.git"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}
