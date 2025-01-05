@@ -21,7 +21,8 @@ describe('Config Utilities', () => {
       pos: { rpcUrl: 'https://polygon-rpc.com', chainId: 137 },
       amoy: { rpcUrl: 'https://rpc-amoy.polygon.technology/', chainId: 80002 },
       zkevm: { rpcUrl: 'https://zkevm-rpc.com', chainId: 1101 },
-      zkevm_testnet: { rpcUrl: 'https://rpc.public.zkevm-test.net', chainId: 1442 },
+      zkevm_testnet: { rpcUrl: 'https://polygon-zkevm-testnet.rpc.thirdweb.com', chainId: 1442 },
+      sepolia: { rpcUrl: 'https://rpc.sepolia.org', chainId: 11155111 },
       mainnet: { rpcUrl: 'https://mainnet.example.com', chainId: 1 },
       testnet: { rpcUrl: 'https://testnet.example.com', chainId: 3 }
     }
@@ -81,7 +82,7 @@ describe('Config Utilities', () => {
   describe('getAvailableNetworks', () => {
     it('should return a list of available networks', () => {
       const networks = getAvailableNetworks();
-      expect(networks).toEqual(['pos', 'amoy', 'zkevm', 'zkevm_testnet', 'mainnet', 'testnet']);
+      expect(networks).toEqual(['pos', 'amoy', 'zkevm', 'zkevm_testnet', 'sepolia', 'mainnet', 'testnet']);
     });
   
     it.skip('should handle case when no networks are configured', () => {
@@ -99,7 +100,6 @@ describe('Config Utilities', () => {
       expect(fs.writeFileSync).toHaveBeenCalledWith(mockConfigFile, expect.any(String));
     });
 
-
     it('should merge user config with default config', () => {
       const userConfig = {
         currentNetwork: 'customnet',
@@ -113,6 +113,7 @@ describe('Config Utilities', () => {
       expect(config).toHaveProperty('amoy');
       expect(config).toHaveProperty('zkevm');
       expect(config).toHaveProperty('zkevm_testnet');
+      expect(config).toHaveProperty('sepolia');
       expect(config).toHaveProperty('customnet');
     });
   });
