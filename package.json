@@ -1,6 +1,6 @@
 {
   "name": "polyforge",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A CLI tool for Polygon developers",
   "main": "src/index.js",
   "bin": {
