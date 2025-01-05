@@ -1,30 +1,74 @@
 # PolyForge
 
-PolyForge is a powerful CLI tool designed for Polygon and Ethereum developers, streamlining the process of deploying, interacting with, and testing smart contracts on various networks including Polygon (PoS), zkEVM, and Ethereum testnets.
+[![npm version](https://badge.fury.io/js/polyforge.svg)](https://www.npmjs.com/package/polyforge)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](http://makeapullrequest.com)
 
-## Table of Contents
+🛠️ A powerful CLI tool for Polygon and Ethereum developers, streamlining the process of deploying, interacting with, and testing smart contracts on various networks including Polygon (PoS), zkEVM, and Ethereum testnets.
 
-1. [Installation](#installation)
-2. [Setup](#setup)
-3. [Usage](#usage)
-   - [Deploy](#deploy)
-   - [Interact](#interact)
-   - [Test](#test)
-   - [Switch Network](#switch-network)
-   - [Key Management](#key-management)
-4. [Configuration](#configuration)
-5. [Security](#security)
-6. [Development](#development)
-7. [Testing](#testing)
-8. [Contributing](#contributing)
-9. [License](#license)
+## Features
+
+- 🔒 Secure key management with encryption
+- 🌐 Support for multiple networks (Polygon PoS, zkEVM, Ethereum)
+- 📝 Simple contract deployment and interaction
+- ⚡ Fast and efficient testing tools
+- 🔄 Easy network switching
+- ⚙️ Configurable RPC endpoints
+
+## Requirements
+
+- Node.js 14.x or higher
+- npm 6.x or higher
+- A wallet with test tokens for contract deployment
+
+## Quick Start
+
+```bash
+# Install globally
+npm install -g polyforge
+
+# Check current network
+polyforge network
+
+# Add your private key (encrypted)
+polyforge key add default
+
+# Deploy a contract
+polyforge deploy ./contracts/MyContract.json -n sepolia
+
+# Interact with contract
+polyforge interact <contract-address> ./contracts/MyContract.json getValue
+```
+
+## Documentation
+
+- [Installation](#installation)
+- [Setup](#setup)
+- [Usage Guide](#usage)
+  - [Contract Deployment](#deploy)
+  - [Contract Interaction](#interact)
+  - [Testing](#test)
+  - [Network Management](#switch-network)
+  - [Key Management](#key-management)
+- [Configuration](#configuration)
+- [Security](#security)
 
 ## Installation
 
-To install PolyForge, run the following command:
-
 ```bash
 npm install -g polyforge
+```
+
+To update an existing installation:
+
+```bash
+npm update -g polyforge
+```
+
+To verify the installation:
+
+```bash
+polyforge --version
 ```
 
 ## Setup
@@ -64,12 +108,8 @@ polyforge deploy ./contracts/MyToken.json -n sepolia -k default
 Interact with a deployed contract:
 
 ```bash
-polyforge interact <contractAddress> ./path/to/ContractABI.json <methodName> [params...] -n network -k keyname
+polyforge interact <contractAddress> ./path/to/ContractABI.json <methodName> [params...]
 ```
-
-Options:
-- `-n, --network <network>`: Specify the network
-- `-k, --key <keyName>`: Specify the key to use for interaction
 
 Examples:
 ```bash
@@ -82,25 +122,7 @@ polyforge interact 0x1234...5678 ./MyToken.json transfer 0xabcd...efgh 1000
 
 The tool will automatically wait for write transactions to be mined and confirm their success.
 
-### Test
-
-Run tests for a smart contract:
-
-```bash
-polyforge test ./path/to/TestContract.json -n network -k keyname
-```
-
-Options:
-- `-n, --network <network>`: Specify the network
-- `-k, --key <keyName>`: Specify the key to use for testing
-
-### Switch Network
-
-Switch between networks:
-
-```bash
-polyforge switch <network>
-```
+### Networks
 
 Available networks: 
 - Polygon Mainnet: `pos`
@@ -109,47 +131,21 @@ Available networks:
 - Polygon zkEVM Testnet: `zkevm_testnet`
 - Ethereum Sepolia: `sepolia`
 
-### Key Management
-
-PolyForge includes a secure key management system:
-
+Switch networks using:
 ```bash
-# Add a new key (will prompt for the key)
-polyforge key add mykey
-
-# List all stored keys (shows only key names, not the actual keys)
-polyforge key list
-
-# Remove a key
-polyforge key remove mykey
+polyforge switch <network>
 ```
 
 ## Configuration
 
-PolyForge uses a configuration file located at `~/.polyforge/config.json`. The file stores network configurations and the current network setting.
+Configuration file location: `~/.polyforge/config.json`
 
-Default networks:
+Default RPC endpoints are provided, but you can customize them:
 
 ```json
 {
   "currentNetwork": "sepolia",
   "networks": {
-    "pos": {
-      "rpcUrl": "https://polygon-rpc.com",
-      "chainId": 137
-    },
-    "amoy": {
-      "rpcUrl": "https://rpc-amoy.polygon.technology/",
-      "chainId": 80002
-    },
-    "zkevm": {
-      "rpcUrl": "https://zkevm-rpc.com",
-      "chainId": 1101
-    },
-    "zkevm_testnet": {
-      "rpcUrl": "https://polygon-zkevm-testnet.rpc.thirdweb.com",
-      "chainId": 1442
-    },
     "sepolia": {
       "rpcUrl": "https://rpc.sepolia.org",
       "chainId": 11155111
@@ -158,47 +154,25 @@ Default networks:
 }
 ```
 
-You can modify this file directly or use the `polyforge switch` command to change networks.
-
 ## Security
 
 PolyForge takes security seriously:
 
-- Private keys are never stored in plain text
-- Keys are encrypted using a password you provide
-- The `.env` file is not used for key storage
-- Test files use mock private keys
-- Configuration files with sensitive data are automatically added to `.gitignore`
+- 🔐 Private keys are never stored in plain text
+- 🔑 Keys are encrypted with a password you provide
+- 📝 No sensitive data in environment files
+- ✅ Automatic gitignore for sensitive files
 
-## Development
+## Support
 
-To set up the development environment:
-
-1. Clone the repository
-2. Run `npm install` to install dependencies
-3. Use `npm run test` to run the test suite
-
-## Testing
-
-PolyForge uses Jest for testing. To run the tests:
-
-```bash
-npm run test          # Run all tests
-npm run test:unit     # Run unit tests only
-npm run test:integration  # Run integration tests only
-```
+- [GitHub Issues](https://github.com/yourusername/polyforge/issues)
+- [Documentation](https://github.com/yourusername/polyforge#documentation)
 
 ## Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request. When contributing, please:
-
-1. Follow the existing code style
-2. Add tests for any new functionality
-3. Update documentation as needed
-4. Ensure all tests pass
-5. Never commit private keys or sensitive information
+We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
 
 ## License
 
-This project is licensed under the MIT License.
+MIT © [Your Name]
 
